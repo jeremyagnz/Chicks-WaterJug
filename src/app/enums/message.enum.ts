@@ -1,5 +1,5 @@
 
-export enum message {
+export enum viewSolvability {
   isSolvable = "Its possible!",
   notSolvable = "Not Possible"
 }

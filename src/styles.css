@@ -8,3 +8,6 @@ body {
   height: 100vh;
   background: url(https://chicksgold.com/home/background.jpg) center center / cover no-repeat #37384b;
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
