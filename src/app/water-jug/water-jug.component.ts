@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class WaterJugComponent {
 
+  capacityX!: number;
+  capacityY!: number;
+  target!: number;
+
+
+  isSolvable(){
+  }
+
 }
