@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { WaterJugLogicService } from '../service/water-jug-logic.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-water-jug',
@@ -11,8 +13,18 @@ export class WaterJugComponent {
   capacityY!: number;
   target!: number;
 
+  constructor(private waterJugLogicService: WaterJugLogicService, private snackBar: MatSnackBar) { }
 
-  isSolvable(){
+  checkSolvability() {
+    const result = this.waterJugLogicService.isSolvable(this.capacityX, this.capacityY, this.target);
+    /* Add Enums */
+    const message = result ? 'Yes, it is possible!' : 'No, it is not possible.';
+    this.showToast(message);
   }
 
+  showToast(message: string) {
+    this.snackBar.open(message, 'Close', {
+      duration: 3000,
+    });
+  }
 }

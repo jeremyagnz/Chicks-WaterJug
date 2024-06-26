@@ -1,0 +1,57 @@
+.main-container{
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+
+
+/* Estilo para el formulario */
+.container {
+  background-color: #37384b60;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  width: 350px;
+}
+
+h1 {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.568);
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+input {
+  height: 25px;
+  background-color:  rgba(255, 255, 255, 0.363);
+  outline: none;
+  border-radius: 5px;
+}
+
+label{
+  font-weight: 500;
+  color:  rgba(255, 255, 255, 0.568);
+}
+button {
+  padding: 10px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.897);;
+  color: rgb(7, 5, 5);
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: rgba(255, 255, 255, 0.568);
+}
