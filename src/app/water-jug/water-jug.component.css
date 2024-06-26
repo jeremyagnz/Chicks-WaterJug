@@ -1,51 +1,54 @@
-.main-container{
-  width: 100vw;
-  height: 100vh;
+.main-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 25px;
+  gap: 20px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
-
-
-/* Estilo para el formulario */
 .container {
   background-color: #37384b60;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin: 20px auto;
-  width: 350px;
+  width: 100%;
+  max-width: 350px;
+  box-sizing: border-box;
 }
 
 h1 {
   text-align: center;
   color: rgba(255, 255, 255, 0.568);
+  margin-bottom: 20px;
 }
 
 form {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
 }
 
 input {
-  height: 25px;
-  background-color:  rgba(255, 255, 255, 0.363);
+  height: 40px;
+  padding: 0 10px;
+  background-color: rgba(255, 255, 255, 0.363);
+  border: none;
   outline: none;
   border-radius: 5px;
 }
 
-label{
+label {
   font-weight: 500;
-  color:  rgba(255, 255, 255, 0.568);
+  color: rgba(255, 255, 255, 0.568);
 }
+
 button {
-  padding: 10px;
+  padding: 12px 20px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.897);;
+  background-color: rgba(255, 255, 255, 0.897);
   color: rgb(7, 5, 5);
   font-weight: 600;
   border-radius: 4px;
@@ -54,4 +57,41 @@ button {
 
 button:hover {
   background-color: rgba(255, 255, 255, 0.568);
+}
+
+.ui-challenge-link {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.ui-challenge-link a {
+  color: #fff;
+  text-decoration: none;
+  animation: blink-animation 2s infinite;
+}
+
+@keyframes blink-animation {
+  0%, 50%, 100% {
+    opacity: 0;
+  }
+  25%, 75% {
+    opacity: 1;
+  }
+}
+
+
+@media screen and (max-width: 480px) {
+  .container {
+    padding: 15px;
+  }
+
+  input {
+    height: 35px;
+    font-size: 14px;
+  }
+
+  button {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
 }

@@ -1,25 +1,27 @@
 <div class="main-container">
+  <app-header-challenge></app-header-challenge>
+  <div class="container">
+    <h1>Water Jug Challenge</h1>
+    <form (ngSubmit)="checkSolvability()">
+      <label for="capacityX">Jug X:</label>
+      <input type="number" [(ngModel)]="capacityX" name="capacityX" required>
+      <br>
+      <label for="capacityY">Jug Y:</label>
+      <input type="number" [(ngModel)]="capacityY" name="capacityY" required>
+      <br>
+      <label for="target">Target (Z):</label>
+      <input type="number" [(ngModel)]="target" name="target" required>
+      <br>
+      <button type="submit" (click)="checkSolvability()">
+        <span *ngIf="loading; else notLoading">
+          <i class="fas fa-spinner fa-spin"></i> Checking...
+        </span>
+        <ng-template #notLoading>Check Solvability</ng-template>
+      </button>
+    </form>
+  </div>
 
-<app-header-challenge></app-header-challenge>
-<div class="container">
-  <h1>Water Jug Challenge</h1>
-  <form (ngSubmit)="checkSolvability()">
-    <label for="capacityX">Jug X:</label>
-    <input type="number" [(ngModel)]="capacityX" name="capacityX" required>
-    <br>
-    <label for="capacityY">Jug Y:</label>
-    <input type="number" [(ngModel)]="capacityY" name="capacityY" required>
-    <br>
-    <label for="target">Target(Z):</label>
-    <input type="number" [(ngModel)]="target" name="target" required>
-    <br>
-    <button type="submit">Check Solvability</button>
-  </form>
-</div>
-
-<!-- Add Css  -->
-<div>
-  <a href="https://jeremyagnz.github.io/chiksgold/list" target="_blank">See My Ui Challenge</a>
-</div>
-
+  <div class="ui-challenge-link">
+    <a href="https://jeremyagnz.github.io/chiksgold/list" target="_blank">See My UI Challenge</a>
+  </div>
 </div>
