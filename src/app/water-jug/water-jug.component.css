@@ -7,6 +7,7 @@
   gap: 20px;
   padding: 20px;
   box-sizing: border-box;
+  color: rgba(255, 255, 255, 0.568);
 }
 
 .container {
@@ -79,7 +80,6 @@ button:hover {
   }
 }
 
-
 @media screen and (max-width: 480px) {
   .container {
     padding: 15px;
@@ -94,4 +94,38 @@ button:hover {
     padding: 10px 15px;
     font-size: 14px;
   }
+}
+
+.table-container {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.table-container thead {
+  color: black;
+}
+
+.table-container th,
+.table-container td {
+  padding: 10px;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+.table-container th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.table-container .solution-row {
+  font-style: italic;
+  color: green;
+  font-weight: bold;
+}
+
+.table-container tbody tr:last-child td {
+  background-color: rgba(255, 255, 255, 0.3);
+  font-weight: bold;
+  text-align: center;
 }
