@@ -61,6 +61,6 @@ To create a production build:
     git push origin HEAD:gh-pages
     ```
 ## Unit Test
-    ```bash
+  ```bash
     ng test --include=src/app/service/water-jug-logic.service.spec.ts
-    ```
+   ```
