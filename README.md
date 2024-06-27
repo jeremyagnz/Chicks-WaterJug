@@ -17,7 +17,13 @@ Measure Z gallons of water using only the two jugs in the most efficient way pos
     ```bash
     cd Chicks-WhaterJug
     ```
-3. Install the dependencies:
+3. Install Angular Material:
+    ```bash
+    ng add @angular/material
+    ```
+   Follow the prompts to choose a theme and set up global Angular Material typography and animations.
+
+4. Install the dependencies:
     ```bash
     npm install
     ```
@@ -28,7 +34,7 @@ To run the application in development mode:
     ```bash
     ng serve
     ```
-Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Navigate to \`http://localhost:4200/\`. The application will automatically reload if you change any of the source files.
 
 ## Production Build
 
