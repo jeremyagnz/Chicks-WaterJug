@@ -1,6 +1,10 @@
 # ChicksWaterJug
 
-Measure Z gallons of water using only the two jugs in the most efficient way possible.
+The challenge involves using two jugs with different capacities (X gallons and Y gallons) to measure exactly Z gallons of water. Your application should have a user interface (UI) that displays the state changes of each jug (Empty, Full, or Partially Full) as it progresses towards the solution.
+Goals
+
+1. Problem Solving: Measure Z gallons of water using only the two jugs in the most efficient way possible.
+2. User Interface Development: Create a UI where users can input any values for X, Y, and Z, and see the step-by-step solution. If a solution is not possible, the UI should display “No Solution”.
 
 ## Technologies Used
 
