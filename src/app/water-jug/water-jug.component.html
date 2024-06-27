@@ -33,9 +33,6 @@
             <td>{{ entry.state[0] }}</td>
             <td>{{ entry.state[1] }}</td>
           </tr>
-          <tr *ngIf="log.length > 0">
-            <td colspan="2">Total: {{ log[log.length - 1].state[0] + log[log.length - 1].state[1] }}</td>
-          </tr>
         </tbody>
       </table>
     </div>
