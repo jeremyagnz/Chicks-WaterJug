@@ -1,27 +1,62 @@
 # ChicksWaterJug
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.9.
+The challenge involves using two jugs with different capacities (X gallons and Y gallons) to measure exactly Z gallons of water. Your application should have a user interface (UI) that displays the state changes of each jug (Empty, Full, or Partially Full) as it progresses towards the solution.
+Goals
 
-## Development server
+1. Problem Solving: Measure Z gallons of water using only the two jugs in the most efficient way possible.
+2. User Interface Development: Create a UI where users can input any values for X, Y, and Z, and see the step-by-step solution. If a solution is not possible, the UI should display “No Solution”.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Technologies Used
 
-## Code scaffolding
+- **Angular CLI**: 15.2.9
+- **Node.js**: 20.12.2
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Installation
 
-## Build
+1. Clone the repository:
+    ```bash
+    git clone https://github.com/jeremyagnz/Chicks-WhaterJug.git
+    ```
+2. Navigate to the project directory:
+    ```bash
+    cd Chicks-WhaterJug
+    ```
+3. Install Angular Material:
+    ```bash
+    ng add @angular/material
+    ```
+   Follow the prompts to choose a theme and set up global Angular Material typography and animations.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+4. Install the dependencies:
+    ```bash
+    npm install
+    ```
 
-## Running unit tests
+## Development Server
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+To run the application in development mode:
+    ```bash
+    ng serve
+    ```
+Navigate to \`http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
-## Running end-to-end tests
+## Production Build
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+To create a production build:
+1. Install Angular CLI GitHub Pages:
+    ```bash
+    npm install -g angular-cli-ghpages
+    ```
+2. Build the project with production configuration:
+    ```bash
+    ng build --configuration=production --base-href=/Chicks-WhaterJug/
+    ```
+3. Deploy the build to GitHub Pages:
+    ```bash
+    cd path/to/your/project/dist/Chicks-WhaterJug
+    git init
+    git add .
+    git commit -m "commit"
+    git remote add origin https://github.com/jeremyagnz/Chicks-WhaterJug.git
+    git push origin HEAD:gh-pages
+    ```
