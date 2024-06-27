@@ -12,7 +12,7 @@
       <label for="target">Target (Z):</label>
       <input type="number" [(ngModel)]="target" name="target" required>
       <br>
-      <button type="submit" (click)="checkSolvability()">
+      <button type="submit" [disabled]="loading">
         <span *ngIf="loading; else notLoading">
           <i class="fas fa-spinner fa-spin"></i> Checking...
         </span>

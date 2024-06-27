@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-/* Añadir Enum */
 type State = [number, number];
+
 @Injectable({
   providedIn: 'root'
 })
@@ -10,6 +10,11 @@ export class WaterJugLogicService {
   constructor() { }
 
   isSolvable(capacityX: number, capacityY: number, target: number): boolean {
+
+    if (!this.isValidInput(capacityX, capacityY, target)) {
+      throw new Error('Invalid input: X, Y, and Z must be integers greater than 0.');
+    }
+
     if (target > capacityX && target > capacityY) {
       return false;
     }
@@ -41,6 +46,11 @@ export class WaterJugLogicService {
     return false;
   }
 
+  private isValidInput(capacityX: number, capacityY: number, target: number): boolean {
+    return Number.isInteger(capacityX) && Number.isInteger(capacityY) && Number.isInteger(target) &&
+           capacityX > 0 && capacityY > 0 && target >= 0;
+  }
+
   private serialize(state: State): string {
     return `${state[0]},${state[1]}`;
   }
@@ -48,25 +58,37 @@ export class WaterJugLogicService {
   private getNextStates([x, y]: State, capacityX: number, capacityY: number): State[] {
     const states: State[] = [];
 
-    // Fill Jug X
-    states.push([capacityX, y]);
+    // Load Jug X
+    if (x < capacityX) {
+      states.push([capacityX, y]);
+    }
 
-    // Fill Jug Y
-    states.push([x, capacityY]);
+    // Load Jug Y
+    if (y < capacityY) {
+      states.push([x, capacityY]);
+    }
 
     // Empty Jug X
-    states.push([0, y]);
+    if (x > 0) {
+      states.push([0, y]);
+    }
 
     // Empty Jug Y
-    states.push([x, 0]);
+    if (y > 0) {
+      states.push([x, 0]);
+    }
 
-    // Pour Jug X into Jug Y
-    const pourXtoY = Math.min(x, capacityY - y);
-    states.push([x - pourXtoY, y + pourXtoY]);
+    // Transfer from Jug X to Jug Y
+    if (x > 0 && y < capacityY) {
+      const transferXtoY = Math.min(x, capacityY - y);
+      states.push([x - transferXtoY, y + transferXtoY]);
+    }
 
-    // Pour Jug Y into Jug X
-    const pourYtoX = Math.min(y, capacityX - x);
-    states.push([x + pourYtoX, y - pourYtoX]);
+    // Transfer from Jug Y to Jug X
+    if (y > 0 && x < capacityX) {
+      const transferYtoX = Math.min(y, capacityX - x);
+      states.push([x + transferYtoX, y - transferYtoX]);
+    }
 
     return states;
   }

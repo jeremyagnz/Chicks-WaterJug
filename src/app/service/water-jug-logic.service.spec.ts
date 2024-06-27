@@ -27,9 +27,12 @@ describe('WaterJugLogicService', () => {
   });
 
   it('should handle edge cases', () => {
-    expect(service.isSolvable(0, 0, 0)).toBeTrue();
-    expect(service.isSolvable(0, 5, 2)).toBeFalse();
-    expect(service.isSolvable(5, 0, 2)).toBeFalse();
-    expect(service.isSolvable(3, 5, 1)).toBeFalse();
+    expect(service.isSolvable(3, 5, 1)).toBeTrue(); 
+  });
+
+  it('should throw an error for invalid input', () => {
+    expect(() => service.isSolvable(-1, 3, 4)).toThrowError('Invalid input: X, Y, and Z must be integers greater than 0.');
+    expect(() => service.isSolvable(2.5, 3, 4)).toThrowError('Invalid input: X, Y, and Z must be integers greater than 0.');
+    expect(() => service.isSolvable(2, 3, -1)).toThrowError('Invalid input: X, Y, and Z must be integers greater than 0.');
   });
 });
