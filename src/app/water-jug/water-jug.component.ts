@@ -14,6 +14,7 @@ export class WaterJugComponent {
   capacityY!: number;
   target!: number;
   loading = false;
+  log: { state: [number, number] }[] = [];
 
   constructor(private waterJugLogicService: WaterJugLogicService, private snackBar: MatSnackBar) { }
 
@@ -24,8 +25,10 @@ export class WaterJugComponent {
     try {
       const result = this.waterJugLogicService.isSolvable(this.capacityX, this.capacityY, this.target);
       message = result ? viewSolvability.isSolvable : viewSolvability.notSolvable;
-    } catch (error:any) {
+      this.log = this.waterJugLogicService.log.map(entry => ({ state: entry.state }));
+    } catch (error: any) {
       message = error.message;
+      this.log = [{ state: [0, 0] }];
     }
 
     setTimeout(() => {

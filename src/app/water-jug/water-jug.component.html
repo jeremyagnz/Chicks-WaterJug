@@ -19,6 +19,26 @@
         <ng-template #notLoading>Check Solvability</ng-template>
       </button>
     </form>
+    <div *ngIf="log.length > 0">
+      <h2>Log:</h2>
+      <table class="table-container">
+        <thead>
+          <tr>
+            <th>Jug X</th>
+            <th>Jug Y</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let entry of log; let i = index" [ngClass]="{ 'solution-row': i === log.length - 1 }">
+            <td>{{ entry.state[0] }}</td>
+            <td>{{ entry.state[1] }}</td>
+          </tr>
+          <tr *ngIf="log.length > 0">
+            <td colspan="2">Total: {{ log[log.length - 1].state[0] + log[log.length - 1].state[1] }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 
   <div class="ui-challenge-link">

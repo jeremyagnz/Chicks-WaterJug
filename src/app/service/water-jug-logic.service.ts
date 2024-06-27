@@ -1,49 +1,66 @@
 import { Injectable } from '@angular/core';
 
 type State = [number, number];
+type LogEntry = { state: State, action: string };
 
 @Injectable({
   providedIn: 'root'
 })
 export class WaterJugLogicService {
 
+  log: LogEntry[] = [];
+  shortestLog: LogEntry[] | null = null;
+
   constructor() { }
 
   isSolvable(capacityX: number, capacityY: number, target: number): boolean {
+    this.log = [];
+    this.shortestLog = null;
 
     if (!this.isValidInput(capacityX, capacityY, target)) {
       throw new Error('Invalid input: X, Y, and Z must be integers greater than 0.');
     }
 
     if (target > capacityX && target > capacityY) {
+      this.log.push({ state: [0, 0], action: `Target ${target} is larger than both capacities ${capacityX} and ${capacityY}.` });
       return false;
     }
 
-    const queue: State[] = [];
+    const queue: { state: State, log: LogEntry[] }[] = [];
     const visited: Set<string> = new Set();
 
-    queue.push([0, 0]);
+    queue.push({ state: [0, 0], log: [] });
     visited.add(this.serialize([0, 0]));
 
     while (queue.length > 0) {
-      const [currentX, currentY] = queue.shift()!;
+      const { state, log } = queue.shift()!;
+      this.log = log.slice();
 
-      if (currentX === target || currentY === target || currentX + currentY === target) {
-        return true;
+      if (state[0] === target || state[1] === target || state[0] + state[1] === target) {
+        if (!this.shortestLog || log.length < this.shortestLog.length) {
+          this.shortestLog = log.slice();
+        }
+        continue;
       }
 
-      const nextStates: State[] = this.getNextStates([currentX, currentY], capacityX, capacityY);
+      const nextStates: { state: State, action: string }[] = this.getNextStatesWithActions(state, capacityX, capacityY);
 
-      for (const state of nextStates) {
-        const serializedState = this.serialize(state);
+      for (const { state: nextState, action } of nextStates) {
+        const serializedState = this.serialize(nextState);
         if (!visited.has(serializedState)) {
-          queue.push(state);
+          queue.push({ state: nextState, log: [...log, { state: nextState, action }] });
           visited.add(serializedState);
         }
       }
     }
 
-    return false;
+    if (this.shortestLog) {
+      this.log = this.shortestLog;
+      return true;
+    } else {
+      this.log.push({ state: [0, 0], action: 'No solution found' });
+      return false;
+    }
   }
 
   private isValidInput(capacityX: number, capacityY: number, target: number): boolean {
@@ -55,39 +72,39 @@ export class WaterJugLogicService {
     return `${state[0]},${state[1]}`;
   }
 
-  private getNextStates([x, y]: State, capacityX: number, capacityY: number): State[] {
-    const states: State[] = [];
+  private getNextStatesWithActions([x, y]: State, capacityX: number, capacityY: number): { state: State, action: string }[] {
+    const states: { state: State, action: string }[] = [];
 
     // Load Jug X
     if (x < capacityX) {
-      states.push([capacityX, y]);
+      states.push({ state: [capacityX, y], action: 'Load Jug X' });
     }
 
     // Load Jug Y
     if (y < capacityY) {
-      states.push([x, capacityY]);
+      states.push({ state: [x, capacityY], action: 'Load Jug Y' });
     }
 
     // Empty Jug X
     if (x > 0) {
-      states.push([0, y]);
+      states.push({ state: [0, y], action: 'Empty Jug X' });
     }
 
     // Empty Jug Y
     if (y > 0) {
-      states.push([x, 0]);
+      states.push({ state: [x, 0], action: 'Empty Jug Y' });
     }
 
     // Transfer from Jug X to Jug Y
     if (x > 0 && y < capacityY) {
       const transferXtoY = Math.min(x, capacityY - y);
-      states.push([x - transferXtoY, y + transferXtoY]);
+      states.push({ state: [x - transferXtoY, y + transferXtoY], action: 'Transfer from Jug X to Jug Y' });
     }
 
     // Transfer from Jug Y to Jug X
     if (y > 0 && x < capacityX) {
       const transferYtoX = Math.min(y, capacityX - x);
-      states.push([x + transferYtoX, y - transferYtoX]);
+      states.push({ state: [x + transferYtoX, y - transferYtoX], action: 'Transfer from Jug Y to Jug X' });
     }
 
     return states;
