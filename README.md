@@ -60,3 +60,7 @@ To create a production build:
     git remote add origin https://github.com/jeremyagnz/Chicks-WhaterJug.git
     git push origin HEAD:gh-pages
     ```
+## Unit Test
+    ```bash
+    ng test --include=src/app/service/water-jug-logic.service.spec.ts
+    ```
