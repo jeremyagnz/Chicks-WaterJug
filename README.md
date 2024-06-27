@@ -60,3 +60,14 @@ To create a production build:
     git remote add origin https://github.com/jeremyagnz/Chicks-WhaterJug.git
     git push origin HEAD:gh-pages
     ```
+    
+## Unit Test
+
+Limitations
+  1. Allowed Actions: Fill, Empty, Transfer (between the two jugs only).
+  2. X, Y and Z: All values must be greater than 0.
+  3. X, Y and Z: Must be integers (no decimals, fractions).
+
+  ```bash
+    ng test --include=src/app/service/water-jug-logic.service.spec.ts
+   ```
