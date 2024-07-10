@@ -10,6 +10,7 @@ export class WaterJugLogicService {
 
   log: LogEntry[] = [];
   shortestLog: LogEntry[] | null = null;
+  private maxDepth = 1000;
 
   constructor() { }
 
@@ -26,14 +27,14 @@ export class WaterJugLogicService {
       return false;
     }
 
-    const queue: { state: State, log: LogEntry[] }[] = [];
+    const queue: { state: State, log: LogEntry[], depth: number }[] = [];
     const visited: Set<string> = new Set();
 
-    queue.push({ state: [0, 0], log: [] });
+    queue.push({ state: [0, 0], log: [], depth: 0 });
     visited.add(this.serialize([0, 0]));
 
     while (queue.length > 0) {
-      const { state, log } = queue.shift()!;
+      const { state, log, depth } = queue.shift()!;
       this.log = log.slice();
 
       if (state[0] === target || state[1] === target || state[0] + state[1] === target) {
@@ -43,13 +44,22 @@ export class WaterJugLogicService {
         continue;
       }
 
+      if (depth >= this.maxDepth) {
+        continue;
+      }
+
       const nextStates: { state: State, action: string }[] = this.getNextStatesWithActions(state, capacityX, capacityY);
 
       for (const { state: nextState, action } of nextStates) {
         const serializedState = this.serialize(nextState);
         if (!visited.has(serializedState)) {
-          queue.push({ state: nextState, log: [...log, { state: nextState, action }] });
+          queue.push({ state: nextState, log: [...log, { state: nextState, action }], depth: depth + 1 });
           visited.add(serializedState);
+
+
+          if (queue.length > 1000000) {
+            throw new Error('Exceeded maximum queue size. Unable to find solution.');
+          }
         }
       }
     }
